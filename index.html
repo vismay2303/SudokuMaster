@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sudoku</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+button{
+    margin: 0;
+    margin-right: -50%;
+    background-color: #4CAF50;
+    border-color: black;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 150%;
+}
+label {
+	font-size: 30px;
+}
+.container-fluid{
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+.col-sm-1 {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    width:62px;
+    max-width:62px;
+    height:62px;
+    max-height:62px;
+    display: inline-block;
+    line-height: 30x;
+    font-size: 200%;
+}
+input[type="number"] {
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+    background-color: white;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 60px;
+    height: 60px;
+}
+.row3 .col-sm-1 {
+    border-bottom-width: 3px;
+}
+.row6 .col-sm-1 {
+    border-bottom-width: 3px;
+}
+.container-fluid * > div:nth-of-type(3) { border-right-width: 3px; }
+div {
+    box-sizing: border-box;
+    float: left;
+}
+.container-fluid * > div:nth-of-type(6) { border-right-width: 3px; }
+div {
+    box-sizing: border-box;
+    float: left;
+}
+</style>
+<script>
+	var randoms=new Array();
+    function check1() {
+        var i=1;
+        while(i<10){
+            var j=1;
+            while(j<10&&j>0){
+                var testee1 = document.getElementById(i.toString().concat(j.toString()));
+                if(testee1.innerHTML.includes("input")){
+                    var testee1 = document.getElementById("empty-".concat(i.toString().concat(j.toString())));
+                    if( testee1.value == ''){
+                        testee1.style.backgroundColor = "red";
+                        //return ;
+                    }
+                    testee1=testee1.value;
+                }
+                else{
+                    testee1=testee1.innerHTML;
+                }
+                for(var m=j+1;m<10;m++){
+                    var testee2 = document.getElementById(i.toString().concat(m.toString()));
+                    if(testee2.innerHTML.includes("input")){
+                        var testee2 = document.getElementById("empty-".concat(i.toString().concat(m.toString())));
+                        if( testee2.value == ''){
+                            testee2.style.backgroundColor = "red";
+                            //return ;
+                        }
+                        testee2=testee2.value;
+                    }
+                    else{
+                        testee2=testee2.innerHTML;
+                    }
+                    if(testee1==testee2){
+                        break;
+                    }
+                    else{
+                        if(m==9){
+                            
+                        }
+                    }
+                    
+                }
+                j++;
+            }
+            i++;
+        }
+        alert("Solved!");
+    }
+    function setDiff1(){
+    	var values=10;
+    	randoms = new Array();
+    	$.get('./generate.php', function(data) {
+		    data_from_php = data.split(" ");
+ 
+		    for (i=0;i<values;i++){
+		        var ran = Math.floor((Math.random() * 81) );
+		        if(randoms.indexOf(ran)==-1){
+		            randoms.push(ran);
+		        }
+		    }
+		    for( i=1; i< 10; i++ )
+		    {
+		        for(j=1;j<10;j++){
+		            var cell = document.getElementById(i.toString().concat(j.toString()));
+		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+		            }
+		            else{
+		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+		            }
+		        }
+		    }
+	    });
+    }
+    function setDiff2(){
+    	var values=20;
+    	randoms = new Array();
+    	$.get('./generate.php', function(data) {
+		    data_from_php = data.split(" ");
+ 
+		    for (i=0;i<values;i++){
+		        var ran = Math.floor((Math.random() * 81) );
+		        if(randoms.indexOf(ran)==-1){
+		            randoms.push(ran);
+		        }
+		    }
+		    for( i=1; i< 10; i++ )
+		    {
+		        for(j=1;j<10;j++){
+		            var cell = document.getElementById(i.toString().concat(j.toString()));
+		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+		            }
+		            else{
+		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+		            }
+		        }
+		    }
+	    });
+    }
+    function setDiff3(){
+    	var values=35;
+    	randoms = new Array();
+    	$.get('./generate.php', function(data) {
+		    data_from_php = data.split(" ");
+ 
+		    for (i=0;i<values;i++){
+		        var ran = Math.floor((Math.random() * 81) );
+		        if(randoms.indexOf(ran)==-1){
+		            randoms.push(ran);
+		        }
+		    }
+		    for( i=1; i< 10; i++ )
+		    {
+		        for(j=1;j<10;j++){
+		            var cell = document.getElementById(i.toString().concat(j.toString()));
+		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+		            }
+		            else{
+		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+		            }
+		        }
+		    }
+	    });
+    }
+    function setDiff4(){
+    	var values=50;
+    	randoms = new Array();
+    	$.get('./generate.php', function(data) {
+		    data_from_php = data.split(" ");
+ 
+		    for (i=0;i<values;i++){
+		        var ran = Math.floor((Math.random() * 81) );
+		        if(randoms.indexOf(ran)==-1){
+		            randoms.push(ran);
+		        }
+		    }
+		    for( i=1; i< 10; i++ )
+		    {
+		        for(j=1;j<10;j++){
+		            var cell = document.getElementById(i.toString().concat(j.toString()));
+		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+		            }
+		            else{
+		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+		            }
+		        }
+		    }
+	    });
+    }
+    function setDiff5(){
+    	var values=65;
+    	randoms=new Array();
+    	$.get('./generate.php', function(data) {
+		    data_from_php = data.split(" ");
+ 
+		    for (i=0;i<values;i++){
+		        var ran = Math.floor((Math.random() * 81) );
+		        if(randoms.indexOf(ran)==-1){
+		            randoms.push(ran);
+		        }
+		    }
+		    for( i=1; i< 10; i++ )
+		    {
+		        for(j=1;j<10;j++){
+		            var cell = document.getElementById(i.toString().concat(j.toString()));
+		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+		            }
+		            else{
+		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+		            }
+		        }
+		    }
+	    });
+    }
+
+    	var randoms=new Array();
+    
+    	$.get('./generate.php', function(data) {
+		    data_from_php = data.split(" ");
+ 
+		    for (i=0;i<10;i++){
+		        var ran = Math.floor((Math.random() * 81) );
+		        if(randoms.indexOf(ran)==-1){
+		            randoms.push(ran);
+		        }
+		    }
+		    for( i=1; i< 10; i++ )
+		    {
+		        for(j=1;j<10;j++){
+		            var cell = document.getElementById(i.toString().concat(j.toString()));
+		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+		            }
+		            else{
+		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+		            }
+		        }
+		    }
+	    });
+    
+    function check(){
+        var correct=true;
+        for(i=0;i<randoms.length;i++){
+            target=(Math.floor(parseInt(randoms[i],10)/9)+1).toString().concat((parseInt(randoms[i],10)%9+1).toString());
+            var testee1 = document.getElementById("empty-".concat(target.toString()));
+            if(testee1.value==''||parseInt(testee1.value,10)<1 || parseInt(testee1.value,10)>9 || (Number(testee1.value)===testee1.value && testee1.value%1!==0)){
+                testee1.style.backgroundColor = "red";
+                correct=false;
+                continue;
+            }
+            for(j=1;j<10;j++){
+                if(j!=parseInt(target.toString()[1],10)){
+                    var testee2 = document.getElementById(j.toString().concat(target.toString()[1]));
+                    if(testee1.value==testee2.innerHTML){
+                        testee1.style.backgroundColor = "red";
+                        correct=false;
+                        break;
+                    }
+                    else{
+                        testee1.style.backgroundColor = "green";
+                    }
+                }
+                if(j!=parseInt(target.toString()[0],10)){
+                    var testee3 = document.getElementById(target.toString()[0].concat(j.toString()));
+                    if(testee1.value==testee3.innerHTML){
+                        testee1.style.backgroundColor = "red";
+                        correct=false;
+                        break;
+                    }
+                    else{
+                        testee1.style.backgroundColor = "green";
+                    }
+                }
+            }
+            
+        }
+        if(correct){
+            alert("Congratulations!");
+        }
+    }
+</script>
+</head>
+<body>
+
+<div class="container-fluid" id="container">
+  <div class="row1">
+      <div class="col-sm-1" id="11"></div>
+      <div class="col-sm-1" id="12"></div>
+      <div class="col-sm-1" id="13"></div>
+      <div class="col-sm-1" id="14"></div>
+      <div class="col-sm-1" id="15"></div>
+      <div class="col-sm-1" id="16"></div>
+      <div class="col-sm-1" id="17"></div>
+      <div class="col-sm-1" id="18"></div>
+      <div class="col-sm-1" id="19"></div>
+  </div>
+  <br>
+  <div class="row2" >
+      <div class="col-sm-1" id="21"></div>
+      <div class="col-sm-1" id="22"></div>
+      <div class="col-sm-1" id="23"></div>
+      <div class="col-sm-1" id="24"></div>
+      <div class="col-sm-1" id="25"></div>
+      <div class="col-sm-1" id="26"></div>
+      <div class="col-sm-1" id="27"></div>
+      <div class="col-sm-1" id="28"></div>
+      <div class="col-sm-1" id="29"></div>
+  </div>
+  <br>
+  <div class="row3" >
+      <div class="col-sm-1" id="31"></div>
+      <div class="col-sm-1" id="32"></div>
+      <div class="col-sm-1" id="33"></div>
+      <div class="col-sm-1" id="34"></div>
+      <div class="col-sm-1" id="35"></div>
+      <div class="col-sm-1" id="36"></div>
+      <div class="col-sm-1" id="37"></div>
+      <div class="col-sm-1" id="38"></div>
+      <div class="col-sm-1" id="39"></div>
+  </div>
+  <br>
+  <div class="row4" >
+      <div class="col-sm-1" id="41"></div>
+      <div class="col-sm-1" id="42"></div>
+      <div class="col-sm-1" id="43"></div>
+      <div class="col-sm-1" id="44"></div>
+      <div class="col-sm-1" id="45"></div>
+      <div class="col-sm-1" id="46"></div>
+      <div class="col-sm-1" id="47"></div>
+      <div class="col-sm-1" id="48"></div>
+      <div class="col-sm-1" id="49"></div>
+  </div>
+  <br>
+  <div class="row5" >
+      <div class="col-sm-1" id="51"></div>
+      <div class="col-sm-1" id="52"></div>
+      <div class="col-sm-1" id="53"></div>
+      <div class="col-sm-1" id="54"></div>
+      <div class="col-sm-1" id="55"></div>
+      <div class="col-sm-1" id="56"></div>
+      <div class="col-sm-1" id="57"></div>
+      <div class="col-sm-1" id="58"></div>
+      <div class="col-sm-1" id="59"></div>
+  </div>
+  <br>
+  <div class="row6" >
+      <div class="col-sm-1" id="61"></div>
+      <div class="col-sm-1" id="62"></div>
+      <div class="col-sm-1" id="63"></div>
+      <div class="col-sm-1" id="64"></div>
+      <div class="col-sm-1" id="65"></div>
+      <div class="col-sm-1" id="66"></div>
+      <div class="col-sm-1" id="67"></div>
+      <div class="col-sm-1" id="68"></div>
+      <div class="col-sm-1" id="69"></div>
+  </div>
+  <br>
+  <div class="row7" >
+      <div class="col-sm-1" id="71"></div>
+      <div class="col-sm-1" id="72"></div>
+      <div class="col-sm-1" id="73"></div>
+      <div class="col-sm-1" id="74"></div>
+      <div class="col-sm-1" id="75"></div>
+      <div class="col-sm-1" id="76"></div>
+      <div class="col-sm-1" id="77"></div>
+      <div class="col-sm-1" id="78"></div>
+      <div class="col-sm-1" id="79"></div>
+  </div>
+  <br>
+  <div class="row8" >
+      <div class="col-sm-1" id="81"></div>
+      <div class="col-sm-1" id="82"></div>
+      <div class="col-sm-1" id="83"></div>
+      <div class="col-sm-1" id="84"></div>
+      <div class="col-sm-1" id="85"></div>
+      <div class="col-sm-1" id="86"></div>
+      <div class="col-sm-1" id="87"></div>
+      <div class="col-sm-1" id="88"></div>
+      <div class="col-sm-1" id="89"></div>
+  </div>
+  <br>
+  <div class="row9" >
+      <div class="col-sm-1" id="91"></div>
+      <div class="col-sm-1" id="92"></div>
+      <div class="col-sm-1" id="93"></div>
+      <div class="col-sm-1" id="94"></div>
+      <div class="col-sm-1" id="95"></div>
+      <div class="col-sm-1" id="96"></div>
+      <div class="col-sm-1" id="97"></div>
+      <div class="col-sm-1" id="98"></div>
+      <div class="col-sm-1" id="99"></div>
+  </div>
+  	<button type="button" onclick="setDiff1()">Very Easy</button><br><br>
+	<button type="button" onclick="setDiff2()">Easy</button><br><br>
+	<button type="button" onclick="setDiff3()">Medium</button><br><br>
+	<button type="button" onclick="setDiff4()">Hard</button><br><br>
+	<button type="button" onclick="setDiff5()">Very Hard</button><br><br>
+	<button type="button" onclick="check()">Check</button><br><br>
+</div>
+</body>
+</html>
