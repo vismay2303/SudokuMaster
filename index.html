@@ -55,6 +55,12 @@ input[type="number"] {
     width: 60px;
     height: 60px;
 }
+.row1 {
+	border-top-width: 3px;
+}
+.row9 {
+	border-top-width: 3px;
+}
 .row3 .col-sm-1 {
     border-bottom-width: 3px;
 }
@@ -250,32 +256,6 @@ div {
 		    }
 	    });
     }
-
-    	var randoms=new Array();
-    
-    	$.get('./generate.php', function(data) {
-		    data_from_php = data.split(" ");
- 
-		    for (i=0;i<10;i++){
-		        var ran = Math.floor((Math.random() * 81) );
-		        if(randoms.indexOf(ran)==-1){
-		            randoms.push(ran);
-		        }
-		    }
-		    for( i=1; i< 10; i++ )
-		    {
-		        for(j=1;j<10;j++){
-		            var cell = document.getElementById(i.toString().concat(j.toString()));
-		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
-		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
-		            }
-		            else{
-		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
-		            }
-		        }
-		    }
-	    });
-    
     function check(){
         var correct=true;
         for(i=0;i<randoms.length;i++){
@@ -316,6 +296,32 @@ div {
             alert("Congratulations!");
         }
     }
+	var randoms=new Array();
+
+	$.get('./generate.php', function(data) {
+	    data_from_php = data.split(" ");
+
+	    for (i=0;i<10;i++){
+	        var ran = Math.floor((Math.random() * 81) );
+	        if(randoms.indexOf(ran)==-1){
+	            randoms.push(ran);
+	        }
+	    }
+	    for( i=1; i< 10; i++ )
+	    {
+	        for(j=1;j<10;j++){
+	            var cell = document.getElementById(i.toString().concat(j.toString()));
+	            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+	                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+	            }
+	            else{
+	                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+	            }
+	        }
+	    }
+    });
+    
+
 </script>
 </head>
 <body>
