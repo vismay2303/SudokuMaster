@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sudoku</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+
+label {
+	font-size: 30px;
+}
+.col-sm-1 {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    width:41px;
+    max-width:41px;
+    height:41px;
+    max-height:41px;
+    display: inline-block;
+    line-height: 35px;
+    font-size: 200%;
+}
+input[type="number"] {
+	border-collapse: separate;
+    text-align: center;
+    font-size: 100%;
+    background-color: white;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 40px;
+    height: 40px;
+}
+.row1 .col-sm-1 {
+	border-top-width: 3px;
+}
+.row9 .col-sm-1 {
+	border-bottom-width: 3px;
+}
+.row3 .col-sm-1 {
+    border-bottom-width: 3px;
+}
+.row6 .col-sm-1 {
+    border-bottom-width: 3px;
+}
+* > div:nth-of-type(1) { border-left-width: 3px; }
+* > div:nth-of-type(9) { border-right-width: 3px; }
+* > div:nth-of-type(3) { border-right-width: 3px; }
+div {
+    box-sizing: border-box;
+    float: left;
+}
+* > div:nth-of-type(6) { border-right-width: 3px; }
+div {
+    box-sizing: border-box;
+    float: left;
+}
+body{
+	background-image: url(Wallpaper.jpg);
+}
+div.container{
+	width: 100%;
+	height: 100%;
+}
+div.innerLeft{
+	width:30%;
+	background-color: #FFFFFF;
+	border-radius:15px;
+	height:80%;
+	left:5%;
+	top:50px;
+	position:absolute;
+	box-shadow: 5px 10px 15px #8888DD;
+	border: 2px solid #87CEFA;
+	padding: 15px;
+}
+div.innerRight{
+	width:37.5%;
+	right:20%;
+	top:50px;
+	position:absolute;
+	background-color: #FFFFFF;
+	height:80%;
+	border-radius: 15px;
+	box-shadow: 5px 10px 15px #8888DD;
+	border: 2px solid #87CEFA;
+	padding:30px;
+}
+</style>
+<script>
+	var randoms=new Array();
+    function check1() {
+        var i=1;
+        while(i<10){
+            var j=1;
+            while(j<10&&j>0){
+                var testee1 = document.getElementById(i.toString().concat(j.toString()));
+                if(testee1.innerHTML.includes("input")){
+                    var testee1 = document.getElementById("empty-".concat(i.toString().concat(j.toString())));
+                    if( testee1.value == ''){
+                        testee1.style.backgroundColor = "red";
+                        //return ;
+                    }
+                    testee1=testee1.value;
+                }
+                else{
+                    testee1=testee1.innerHTML;
+                }
+                for(var m=j+1;m<10;m++){
+                    var testee2 = document.getElementById(i.toString().concat(m.toString()));
+                    if(testee2.innerHTML.includes("input")){
+                        var testee2 = document.getElementById("empty-".concat(i.toString().concat(m.toString())));
+                        if( testee2.value == ''){
+                            testee2.style.backgroundColor = "red";
+                            //return ;
+                        }
+                        testee2=testee2.value;
+                    }
+                    else{
+                        testee2=testee2.innerHTML;
+                    }
+                    if(testee1==testee2){
+                        break;
+                    }
+                    else{
+                        if(m==9){
+                            
+                        }
+                    }
+                    
+                }
+                j++;
+            }
+            i++;
+        }
+        alert("Solved!");
+    }
+    function setDiff1(){
+    	var values=40;
+    	randoms = new Array();
+    	$.get('./generate.php', function(data) {
+		    data_from_php = data.split(" ");
+ 
+		    for (i=0;i<values;i++){
+		        var ran = Math.floor((Math.random() * 81) );
+		        if(randoms.indexOf(ran)==-1){
+		            randoms.push(ran);
+		        }
+		    }
+		    for( i=1; i< 10; i++ )
+		    {
+		        for(j=1;j<10;j++){
+		            var cell = document.getElementById(i.toString().concat(j.toString()));
+		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+		            }
+		            else{
+		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+		            }
+		        }
+		    }
+	    });
+    }
+    function setDiff2(){
+    	var values=50;
+    	randoms = new Array();
+    	$.get('./generate.php', function(data) {
+		    data_from_php = data.split(" ");
+ 
+		    for (i=0;i<values;i++){
+		        var ran = Math.floor((Math.random() * 81) );
+		        if(randoms.indexOf(ran)==-1){
+		            randoms.push(ran);
+		        }
+		    }
+		    for( i=1; i< 10; i++ )
+		    {
+		        for(j=1;j<10;j++){
+		            var cell = document.getElementById(i.toString().concat(j.toString()));
+		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+		            }
+		            else{
+		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+		            }
+		        }
+		    }
+	    });
+    }
+    function setDiff3(){
+    	var values=55;
+    	randoms = new Array();
+    	$.get('./generate.php', function(data) {
+		    data_from_php = data.split(" ");
+ 
+		    for (i=0;i<values;i++){
+		        var ran = Math.floor((Math.random() * 81) );
+		        if(randoms.indexOf(ran)==-1){
+		            randoms.push(ran);
+		        }
+		    }
+		    for( i=1; i< 10; i++ )
+		    {
+		        for(j=1;j<10;j++){
+		            var cell = document.getElementById(i.toString().concat(j.toString()));
+		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+		            }
+		            else{
+		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+		            }
+		        }
+		    }
+	    });
+    }
+    function setDiff4(){
+    	var values=58;
+    	randoms = new Array();
+    	$.get('./generate.php', function(data) {
+		    data_from_php = data.split(" ");
+ 
+		    for (i=0;i<values;i++){
+		        var ran = Math.floor((Math.random() * 81) );
+		        if(randoms.indexOf(ran)==-1){
+		            randoms.push(ran);
+		        }
+		    }
+		    for( i=1; i< 10; i++ )
+		    {
+		        for(j=1;j<10;j++){
+		            var cell = document.getElementById(i.toString().concat(j.toString()));
+		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+		            }
+		            else{
+		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+		            }
+		        }
+		    }
+	    });
+    }
+    function setDiff5(){
+    	var values=62;
+    	randoms=new Array();
+    	$.get('./generate.php', function(data) {
+		    data_from_php = data.split(" ");
+ 
+		    for (i=0;i<values;i++){
+		        var ran = Math.floor((Math.random() * 81) );
+		        if(randoms.indexOf(ran)==-1){
+		            randoms.push(ran);
+		        }
+		    }
+		    for( i=1; i< 10; i++ )
+		    {
+		        for(j=1;j<10;j++){
+		            var cell = document.getElementById(i.toString().concat(j.toString()));
+		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+		            }
+		            else{
+		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+		            }
+		        }
+		    }
+	    });
+    }
+    function check(){
+        var correct=true;
+        for(i=0;i<randoms.length;i++){
+            target=(Math.floor(parseInt(randoms[i],10)/9)+1).toString().concat((parseInt(randoms[i],10)%9+1).toString());
+            var testee1 = document.getElementById("empty-".concat(target.toString()));
+            if(testee1.value==''||parseInt(testee1.value,10)<1 || parseInt(testee1.value,10)>9 || (Number(testee1.value)===testee1.value && testee1.value%1!==0)){
+                testee1.style.backgroundColor = "red";
+                correct=false;
+                continue;
+            }
+            for(j=1;j<10;j++){
+                if(j!=parseInt(target.toString()[1],10)){
+                    var testee2 = document.getElementById(j.toString().concat(target.toString()[1]));
+                    if(testee1.value==testee2.innerHTML){
+                        testee1.style.backgroundColor = "red";
+                        correct=false;
+                        break;
+                    }
+                    else{
+                        testee1.style.backgroundColor = "green";
+                    }
+                }
+                if(j!=parseInt(target.toString()[0],10)){
+                    var testee3 = document.getElementById(target.toString()[0].concat(j.toString()));
+                    if(testee1.value==testee3.innerHTML){
+                        testee1.style.backgroundColor = "red";
+                        correct=false;
+                        break;
+                    }
+                    else{
+                        testee1.style.backgroundColor = "green";
+                    }
+                }
+            }
+            
+        }
+        if(correct){
+            alert("Congratulations!");
+        }
+    }
+    function stopTimeMilliseconds(timer) {
+        if (timer) { 
+            clearInterval(timer);
+            return timer;
+        }
+        else return timer;
+    }
+    function startTimeMilliseconds() {
+        var currDate = new Date();
+        return currDate.getTime();	
+    }
+    function getElapsedTimeMilliseconds(startMilliseconds) {
+        if (startMilliseconds > 0) {
+            var currDate = new Date();
+            elapsedMilliseconds = (currDate.getTime() - startMilliseconds);
+            return elapsedMilliseconds;
+        }
+     else {
+        return elapsedMilliseconds = 0;
+        }
+    }
+    function startWatch() { 
+        // START TIMER
+        timer = stopTimeMilliseconds(timer); 
+        var startMilliseconds = startTimeMilliseconds();
+        timer = setInterval(function() { 
+            var elapsedMilliseconds = getElapsedTimeMilliseconds(startMilliseconds); 
+            if (msec < 10) {
+                msec_txt.innerHTML = "00" + msec; 
+            }
+            else if (msec < 100) {
+                msec_txt.innerHTML = "0" + msec;
+            }
+            else {
+                msec_txt.innerHTML = msec;
+            }
+            if (sec < 10) {
+                sec_txt.innerHTML = "0" + sec;
+            }
+            else {
+                sec_txt.innerHTML = sec; 
+            }
+            min_txt.innerHTML = min; 
+            msec = elapsedMilliseconds;
+            if (min >= 59 && sec >=59 && msec > 900) {
+                timer = stopTimeMilliseconds(timer);
+                return true;
+            }
+            if (sec > 59) {
+                sec = 0;
+                min++;
+            }
+            if (msec > 999) {
+                msec = 0;
+                sec++;
+                startWatch();
+            }
+        }, 10);
+    }
+    function stopWatch() {
+        // STOP TIMER
+        timer = stopTimeMilliseconds(timer);
+        return true;
+    }
+    function resetWatch() {
+        // REZERO TIMER
+        timer = stopTimeMilliseconds(timer);
+        msec_txt.innerHTML = "000"; 
+        msec = 0;
+        sec_txt.innerHTML = "00"; 
+        sec = 0;
+        min_txt.innerHTML = "0"; 
+        min = 0;
+        return true;
+    }
+	
+	var randoms=new Array();
+	$.get('./generate.php', function(data) {
+	    data_from_php = data.split(" ");
+
+	    for (i=0;i<40;i++){
+	        var ran = Math.floor((Math.random() * 81) );
+	        if(randoms.indexOf(ran)==-1){
+	            randoms.push(ran);
+	        }
+	    }
+	    for( i=1; i< 10; i++ )
+	    {
+	        for(j=1;j<10;j++){
+	            var cell = document.getElementById(i.toString().concat(j.toString()));
+	            if(randoms.indexOf((i-1)*9+(j-1))==-1){
+	                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+	            }
+	            else{
+	                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+	            }
+	        }
+	    }
+    });    
+</script>
+</body>
+
+</html>
+
+</script>
+</head>
+<body>
+<div class="container">
+    <div class="innerLeft">
+    	<p>Level of Difficulty</p>
+    	<button type="button" onclick="setDiff1(); resetWatch(); startWatch();">Very Easy</button>
+		<button type="button" onclick="setDiff2(); resetWatch(); startWatch();">Easy</button>
+		<button type="button" onclick="setDiff3(); resetWatch(); startWatch();">Medium</button>
+		<button type="button" onclick="setDiff4(); resetWatch(); startWatch();">Hard</button>
+		<button type="button" onclick="setDiff5(); resetWatch(); startWatch();">Very Hard</button><br><br>
+		<p>Time Used:</p>
+		<p id="res"><span style="background-color: green;padding: 10px;color: white;" id="min">0</span> : <span style="background-color: green;padding: 10px;color: white;" id="sec">00</span> : <span style="background-color: green;padding: 10px;color: white;" id="msec">000</span></p><br>
+		<p>Check Submission</p>
+		<button type="button" onclick="check(); stopWatch();">SUBMIT</button><br><br>
+		<script type="text/javascript">
+			var timer = null;
+		    var min_txt = document.getElementById("min");
+		    var min = Number(min_txt.innerHTML);
+		    var sec_txt = document.getElementById("sec");
+		    var sec = Number(sec_txt.innerHTML);
+		    var msec_txt = document.getElementById("msec"); 
+		    var msec = Number(msec_txt.innerHTML);
+		    startWatch();
+		</script>
+    </div>
+    <div class="innerRight">
+	  	<div class="row1">
+	      <div class="col-sm-1" id="11"></div>
+	      <div class="col-sm-1" id="12"></div>
+	      <div class="col-sm-1" id="13"></div>
+	      <div class="col-sm-1" id="14"></div>
+	      <div class="col-sm-1" id="15"></div>
+	      <div class="col-sm-1" id="16"></div>
+	      <div class="col-sm-1" id="17"></div>
+	      <div class="col-sm-1" id="18"></div>
+	      <div class="col-sm-1" id="19"></div>
+	  	</div>
+	  	<br>
+	  	<div class="row2" >
+	      <div class="col-sm-1" id="21"></div>
+	      <div class="col-sm-1" id="22"></div>
+	      <div class="col-sm-1" id="23"></div>
+	      <div class="col-sm-1" id="24"></div>
+	      <div class="col-sm-1" id="25"></div>
+	      <div class="col-sm-1" id="26"></div>
+	      <div class="col-sm-1" id="27"></div>
+	      <div class="col-sm-1" id="28"></div>
+	      <div class="col-sm-1" id="29"></div>
+	  	</div>
+	  	<br>
+	  	<div class="row3" >
+	      <div class="col-sm-1" id="31"></div>
+	      <div class="col-sm-1" id="32"></div>
+	      <div class="col-sm-1" id="33"></div>
+	      <div class="col-sm-1" id="34"></div>
+	      <div class="col-sm-1" id="35"></div>
+	      <div class="col-sm-1" id="36"></div>
+	      <div class="col-sm-1" id="37"></div>
+	      <div class="col-sm-1" id="38"></div>
+	      <div class="col-sm-1" id="39"></div>
+	  	</div>
+	  	<br>
+	  	<div class="row4" >
+	      <div class="col-sm-1" id="41"></div>
+	      <div class="col-sm-1" id="42"></div>
+	      <div class="col-sm-1" id="43"></div>
+	      <div class="col-sm-1" id="44"></div>
+	      <div class="col-sm-1" id="45"></div>
+	      <div class="col-sm-1" id="46"></div>
+	      <div class="col-sm-1" id="47"></div>
+	      <div class="col-sm-1" id="48"></div>
+	      <div class="col-sm-1" id="49"></div>
+	  	</div>
+	  	<br>
+	  	<div class="row5" >
+	      <div class="col-sm-1" id="51"></div>
+	      <div class="col-sm-1" id="52"></div>
+	      <div class="col-sm-1" id="53"></div>
+	      <div class="col-sm-1" id="54"></div>
+	      <div class="col-sm-1" id="55"></div>
+	      <div class="col-sm-1" id="56"></div>
+	      <div class="col-sm-1" id="57"></div>
+	      <div class="col-sm-1" id="58"></div>
+	      <div class="col-sm-1" id="59"></div>
+	  	</div>
+	  	<br>
+	  	<div class="row6" >
+	      <div class="col-sm-1" id="61"></div>
+	      <div class="col-sm-1" id="62"></div>
+	      <div class="col-sm-1" id="63"></div>
+	      <div class="col-sm-1" id="64"></div>
+	      <div class="col-sm-1" id="65"></div>
+	      <div class="col-sm-1" id="66"></div>
+	      <div class="col-sm-1" id="67"></div>
+	      <div class="col-sm-1" id="68"></div>
+	      <div class="col-sm-1" id="69"></div>
+	  	</div>
+	  	<br>
+	  	<div class="row7" >
+	      <div class="col-sm-1" id="71"></div>
+	      <div class="col-sm-1" id="72"></div>
+	      <div class="col-sm-1" id="73"></div>
+	      <div class="col-sm-1" id="74"></div>
+	      <div class="col-sm-1" id="75"></div>
+	      <div class="col-sm-1" id="76"></div>
+	      <div class="col-sm-1" id="77"></div>
+	      <div class="col-sm-1" id="78"></div>
+	      <div class="col-sm-1" id="79"></div>
+	  	</div>
+	  	<br>
+	  	<div class="row8" >
+	      <div class="col-sm-1" id="81"></div>
+	      <div class="col-sm-1" id="82"></div>
+	      <div class="col-sm-1" id="83"></div>
+	      <div class="col-sm-1" id="84"></div>
+	      <div class="col-sm-1" id="85"></div>
+	      <div class="col-sm-1" id="86"></div>
+	      <div class="col-sm-1" id="87"></div>
+	      <div class="col-sm-1" id="88"></div>
+	      <div class="col-sm-1" id="89"></div>
+	  	</div>
+	  	<br>
+	  	<div class="row9" >
+	   		<div class="col-sm-1" id="91"></div>
+	      	<div class="col-sm-1" id="92"></div>
+	      	<div class="col-sm-1" id="93"></div>
+	      	<div class="col-sm-1" id="94"></div>
+	      	<div class="col-sm-1" id="95"></div>
+	      	<div class="col-sm-1" id="96"></div>
+	      	<div class="col-sm-1" id="97"></div>
+	      	<div class="col-sm-1" id="98"></div>
+	      	<div class="col-sm-1" id="99"></div>
+	  	</div>
+    </div>
+</div>
+</body>
+</html>

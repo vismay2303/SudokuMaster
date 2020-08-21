@@ -8,91 +8,85 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-
+.border-bottom {
+	border-bottom: 3px solid black;
+}
+.border-top {
+	border-top: 3px solid black;
+}
+table td:nth-child(3){
+	border-right: 3px solid black;
+}
+table td:nth-child(6){
+	border-right: 3px solid black;
+}
+table td:nth-child(9){
+	border-right: 3px solid black;
+}
+table td:first-child{
+	border-left: 3px solid black;
+}
 label {
-	font-size: 30px;
+    font-size: 30px;
 }
 .col-sm-1 {
     border-style: solid;
     border-color: black;
     border-width: 1px;
-    width:56px;
-    max-width:56px;
-    height:56px;
-    max-height:56px;
+    width:41px;
+    max-width:41px;
+    height:41px;
+    max-height:41px;
     display: inline-block;
-    line-height: 55px;
+    line-height: 35px;
     font-size: 200%;
+    padding:0px;
+    text-align: center;
 }
 input[type="number"] {
-	border-collapse: collapse;
+    border-collapse: separate;
     text-align: center;
     font-size: 100%;
+    border:0px;
     background-color: white;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 55px;
-    height: 55px;
-}
-.row1 .col-sm-1 {
-	border-top-width: 3px;
-}
-.row9 .col-sm-1 {
-	border-bottom-width: 3px;
-}
-.row3 .col-sm-1 {
-    border-bottom-width: 3px;
-}
-.row6 .col-sm-1 {
-    border-bottom-width: 3px;
-}
-* > div:nth-of-type(1) { border-left-width: 3px; }
-* > div:nth-of-type(9) { border-right-width: 3px; }
-* > div:nth-of-type(3) { border-right-width: 3px; }
-div {
-    box-sizing: border-box;
-    float: left;
-}
-* > div:nth-of-type(6) { border-right-width: 3px; }
-div {
-    box-sizing: border-box;
-    float: left;
+    width: 40px;
+    height: 40px;
+
 }
 body{
-	background-image: url(Wallpaper.jpg);
+    background-image: url(Wallpaper.jpg);
 }
 div.container{
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 div.innerLeft{
-	width:20%;
-	background-color: #FFFFFF;
-	border-radius:15px;
-	height:80%;
-	left:5%;
-	top:50px;
-	position:absolute;
-	box-shadow: 5px 10px 15px #8888DD;
-	border: 2px solid #87CEFA;
-	padding:30px;
+    width:30%;
+    background-color: #FFFFFF;
+    border-radius:15px;
+    height:80%;
+    left:5%;
+    top:50px;
+    position:absolute;
+    box-shadow: 5px 10px 15px #8888DD;
+    border: 2px solid #87CEFA;
+    padding: 15px;
 }
 div.innerRight{
-	width:37.5%;
-	right:20%;
-	top:50px;
-	position:absolute;
-	background-color: #FFFFFF;
-	height:80%;
-	border-radius: 15px;
-	box-shadow: 5px 10px 15px #8888DD;
-	border: 2px solid #87CEFA;
-	padding:30px;
+    width:37.5%;
+    right:20%;
+    top:50px;
+    position:absolute;
+    background-color: #FFFFFF;
+    height:80%;
+    border-radius: 15px;
+    box-shadow: 5px 10px 15px #8888DD;
+    border: 2px solid #87CEFA;
+    padding:30px;
 }
 </style>
 <script>
-	var randoms=new Array();
+    var randoms=new Array();
     function check1() {
         var i=1;
         while(i<10){
@@ -140,134 +134,134 @@ div.innerRight{
         alert("Solved!");
     }
     function setDiff1(){
-    	var values=40;
-    	randoms = new Array();
-    	$.get('./generate.php', function(data) {
-		    data_from_php = data.split(" ");
+        var values=40;
+        randoms = new Array();
+        $.get('./generate.php', function(data) {
+            data_from_php = data.split(" ");
  
-		    for (i=0;i<values;i++){
-		        var ran = Math.floor((Math.random() * 81) );
-		        if(randoms.indexOf(ran)==-1){
-		            randoms.push(ran);
-		        }
-		    }
-		    for( i=1; i< 10; i++ )
-		    {
-		        for(j=1;j<10;j++){
-		            var cell = document.getElementById(i.toString().concat(j.toString()));
-		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
-		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
-		            }
-		            else{
-		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
-		            }
-		        }
-		    }
-	    });
+            for (i=0;i<values;i++){
+                var ran = Math.floor((Math.random() * 81) );
+                if(randoms.indexOf(ran)==-1){
+                    randoms.push(ran);
+                }
+            }
+            for( i=1; i< 10; i++ )
+            {
+                for(j=1;j<10;j++){
+                    var cell = document.getElementById(i.toString().concat(j.toString()));
+                    if(randoms.indexOf((i-1)*9+(j-1))==-1){
+                        cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+                    }
+                    else{
+                        cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+                    }
+                }
+            }
+        });
     }
     function setDiff2(){
-    	var values=50;
-    	randoms = new Array();
-    	$.get('./generate.php', function(data) {
-		    data_from_php = data.split(" ");
+        var values=50;
+        randoms = new Array();
+        $.get('./generate.php', function(data) {
+            data_from_php = data.split(" ");
  
-		    for (i=0;i<values;i++){
-		        var ran = Math.floor((Math.random() * 81) );
-		        if(randoms.indexOf(ran)==-1){
-		            randoms.push(ran);
-		        }
-		    }
-		    for( i=1; i< 10; i++ )
-		    {
-		        for(j=1;j<10;j++){
-		            var cell = document.getElementById(i.toString().concat(j.toString()));
-		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
-		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
-		            }
-		            else{
-		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
-		            }
-		        }
-		    }
-	    });
+            for (i=0;i<values;i++){
+                var ran = Math.floor((Math.random() * 81) );
+                if(randoms.indexOf(ran)==-1){
+                    randoms.push(ran);
+                }
+            }
+            for( i=1; i< 10; i++ )
+            {
+                for(j=1;j<10;j++){
+                    var cell = document.getElementById(i.toString().concat(j.toString()));
+                    if(randoms.indexOf((i-1)*9+(j-1))==-1){
+                        cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+                    }
+                    else{
+                        cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+                    }
+                }
+            }
+        });
     }
     function setDiff3(){
-    	var values=55;
-    	randoms = new Array();
-    	$.get('./generate.php', function(data) {
-		    data_from_php = data.split(" ");
+        var values=55;
+        randoms = new Array();
+        $.get('./generate.php', function(data) {
+            data_from_php = data.split(" ");
  
-		    for (i=0;i<values;i++){
-		        var ran = Math.floor((Math.random() * 81) );
-		        if(randoms.indexOf(ran)==-1){
-		            randoms.push(ran);
-		        }
-		    }
-		    for( i=1; i< 10; i++ )
-		    {
-		        for(j=1;j<10;j++){
-		            var cell = document.getElementById(i.toString().concat(j.toString()));
-		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
-		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
-		            }
-		            else{
-		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
-		            }
-		        }
-		    }
-	    });
+            for (i=0;i<values;i++){
+                var ran = Math.floor((Math.random() * 81) );
+                if(randoms.indexOf(ran)==-1){
+                    randoms.push(ran);
+                }
+            }
+            for( i=1; i< 10; i++ )
+            {
+                for(j=1;j<10;j++){
+                    var cell = document.getElementById(i.toString().concat(j.toString()));
+                    if(randoms.indexOf((i-1)*9+(j-1))==-1){
+                        cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+                    }
+                    else{
+                        cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+                    }
+                }
+            }
+        });
     }
     function setDiff4(){
-    	var values=58;
-    	randoms = new Array();
-    	$.get('./generate.php', function(data) {
-		    data_from_php = data.split(" ");
+        var values=58;
+        randoms = new Array();
+        $.get('./generate.php', function(data) {
+            data_from_php = data.split(" ");
  
-		    for (i=0;i<values;i++){
-		        var ran = Math.floor((Math.random() * 81) );
-		        if(randoms.indexOf(ran)==-1){
-		            randoms.push(ran);
-		        }
-		    }
-		    for( i=1; i< 10; i++ )
-		    {
-		        for(j=1;j<10;j++){
-		            var cell = document.getElementById(i.toString().concat(j.toString()));
-		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
-		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
-		            }
-		            else{
-		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
-		            }
-		        }
-		    }
-	    });
+            for (i=0;i<values;i++){
+                var ran = Math.floor((Math.random() * 81) );
+                if(randoms.indexOf(ran)==-1){
+                    randoms.push(ran);
+                }
+            }
+            for( i=1; i< 10; i++ )
+            {
+                for(j=1;j<10;j++){
+                    var cell = document.getElementById(i.toString().concat(j.toString()));
+                    if(randoms.indexOf((i-1)*9+(j-1))==-1){
+                        cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+                    }
+                    else{
+                        cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+                    }
+                }
+            }
+        });
     }
     function setDiff5(){
-    	var values=62;
-    	randoms=new Array();
-    	$.get('./generate.php', function(data) {
-		    data_from_php = data.split(" ");
+        var values=62;
+        randoms=new Array();
+        $.get('./generate.php', function(data) {
+            data_from_php = data.split(" ");
  
-		    for (i=0;i<values;i++){
-		        var ran = Math.floor((Math.random() * 81) );
-		        if(randoms.indexOf(ran)==-1){
-		            randoms.push(ran);
-		        }
-		    }
-		    for( i=1; i< 10; i++ )
-		    {
-		        for(j=1;j<10;j++){
-		            var cell = document.getElementById(i.toString().concat(j.toString()));
-		            if(randoms.indexOf((i-1)*9+(j-1))==-1){
-		                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
-		            }
-		            else{
-		                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
-		            }
-		        }
-		    }
-	    });
+            for (i=0;i<values;i++){
+                var ran = Math.floor((Math.random() * 81) );
+                if(randoms.indexOf(ran)==-1){
+                    randoms.push(ran);
+                }
+            }
+            for( i=1; i< 10; i++ )
+            {
+                for(j=1;j<10;j++){
+                    var cell = document.getElementById(i.toString().concat(j.toString()));
+                    if(randoms.indexOf((i-1)*9+(j-1))==-1){
+                        cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+                    }
+                    else{
+                        cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+                    }
+                }
+            }
+        });
     }
     function check(){
         var correct=true;
@@ -309,153 +303,240 @@ div.innerRight{
             alert("Congratulations!");
         }
     }
-	var randoms=new Array();
-
-	$.get('./generate.php', function(data) {
-	    data_from_php = data.split(" ");
-
-	    for (i=0;i<40;i++){
-	        var ran = Math.floor((Math.random() * 81) );
-	        if(randoms.indexOf(ran)==-1){
-	            randoms.push(ran);
-	        }
-	    }
-	    for( i=1; i< 10; i++ )
-	    {
-	        for(j=1;j<10;j++){
-	            var cell = document.getElementById(i.toString().concat(j.toString()));
-	            if(randoms.indexOf((i-1)*9+(j-1))==-1){
-	                cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
-	            }
-	            else{
-	                cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
-	            }
-	        }
-	    }
-    });
+    function stopTimeMilliseconds(timer) {
+        if (timer) { 
+            clearInterval(timer);
+            return timer;
+        }
+        else return timer;
+    }
+    function startTimeMilliseconds() {
+        var currDate = new Date();
+        return currDate.getTime();  
+    }
+    function getElapsedTimeMilliseconds(startMilliseconds) {
+        if (startMilliseconds > 0) {
+            var currDate = new Date();
+            elapsedMilliseconds = (currDate.getTime() - startMilliseconds);
+            return elapsedMilliseconds;
+        }
+     else {
+        return elapsedMilliseconds = 0;
+        }
+    }
+    function startWatch() { 
+        // START TIMER
+        timer = stopTimeMilliseconds(timer); 
+        var startMilliseconds = startTimeMilliseconds();
+        timer = setInterval(function() { 
+            var elapsedMilliseconds = getElapsedTimeMilliseconds(startMilliseconds); 
+            if (msec < 10) {
+                msec_txt.innerHTML = "00" + msec; 
+            }
+            else if (msec < 100) {
+                msec_txt.innerHTML = "0" + msec;
+            }
+            else {
+                msec_txt.innerHTML = msec;
+            }
+            if (sec < 10) {
+                sec_txt.innerHTML = "0" + sec;
+            }
+            else {
+                sec_txt.innerHTML = sec; 
+            }
+            min_txt.innerHTML = min; 
+            msec = elapsedMilliseconds;
+            if (min >= 59 && sec >=59 && msec > 900) {
+                timer = stopTimeMilliseconds(timer);
+                return true;
+            }
+            if (sec > 59) {
+                sec = 0;
+                min++;
+            }
+            if (msec > 999) {
+                msec = 0;
+                sec++;
+                startWatch();
+            }
+        }, 10);
+    }
+    function stopWatch() {
+        // STOP TIMER
+        timer = stopTimeMilliseconds(timer);
+        return true;
+    }
+    function resetWatch() {
+        // REZERO TIMER
+        timer = stopTimeMilliseconds(timer);
+        msec_txt.innerHTML = "000"; 
+        msec = 0;
+        sec_txt.innerHTML = "00"; 
+        sec = 0;
+        min_txt.innerHTML = "0"; 
+        min = 0;
+        return true;
+    }
     
+    var randoms=new Array();
+    $.get('./generate.php', function(data) {
+        data_from_php = data.split(" ");
+
+        for (i=0;i<40;i++){
+            var ran = Math.floor((Math.random() * 81) );
+            if(randoms.indexOf(ran)==-1){
+                randoms.push(ran);
+            }
+        }
+        for( i=1; i< 10; i++ )
+        {
+            for(j=1;j<10;j++){
+                var cell = document.getElementById(i.toString().concat(j.toString()));
+                if(randoms.indexOf((i-1)*9+(j-1))==-1){
+                    cell.innerHTML=data_from_php[(i-1)*9+(j-1)].replace(/\D/g,'');
+                }
+                else{
+                    cell.innerHTML='<input type="number" min="1" max="9" id="empty-'.concat(i.toString().concat(j.toString())).concat('"/>');
+                }
+            }
+        }
+    });    
+</script>
+</body>
+
+</html>
 
 </script>
 </head>
 <body>
 <div class="container">
     <div class="innerLeft">
-    	<p>Level of Difficulty</p>
-    	<button type="button" onclick="setDiff1()">Very Easy</button>
-		<button type="button" onclick="setDiff2()">Easy</button>
-		<button type="button" onclick="setDiff3()">Medium</button>
-		<button type="button" onclick="setDiff4()">Hard</button>
-		<button type="button" onclick="setDiff5()">Very Hard</button><br><br>
-		<button type="button" onclick="check()">SUBMIT</button><br><br>
+        <p>Level of Difficulty</p>
+        <button type="button" onclick="setDiff1(); resetWatch(); startWatch();">Very Easy</button>
+        <button type="button" onclick="setDiff2(); resetWatch(); startWatch();">Easy</button>
+        <button type="button" onclick="setDiff3(); resetWatch(); startWatch();">Medium</button>
+        <button type="button" onclick="setDiff4(); resetWatch(); startWatch();">Hard</button>
+        <button type="button" onclick="setDiff5(); resetWatch(); startWatch();">Very Hard</button><br><br>
+        <p>Time Used:</p>
+        <p id="res"><span style="background-color: green;padding: 10px;color: white;" id="min">0</span> : <span style="background-color: green;padding: 10px;color: white;" id="sec">00</span> : <span style="background-color: green;padding: 10px;color: white;" id="msec">000</span></p><br>
+        <p>Check Submission</p>
+        <button type="button" onclick="check(); stopWatch();">SUBMIT</button><br><br>
+        <script type="text/javascript">
+            var timer = null;
+            var min_txt = document.getElementById("min");
+            var min = Number(min_txt.innerHTML);
+            var sec_txt = document.getElementById("sec");
+            var sec = Number(sec_txt.innerHTML);
+            var msec_txt = document.getElementById("msec"); 
+            var msec = Number(msec_txt.innerHTML);
+            startWatch();
+        </script>
     </div>
     <div class="innerRight">
-	  	<div class="row1">
-	      <div class="col-sm-1" id="11"></div>
-	      <div class="col-sm-1" id="12"></div>
-	      <div class="col-sm-1" id="13"></div>
-	      <div class="col-sm-1" id="14"></div>
-	      <div class="col-sm-1" id="15"></div>
-	      <div class="col-sm-1" id="16"></div>
-	      <div class="col-sm-1" id="17"></div>
-	      <div class="col-sm-1" id="18"></div>
-	      <div class="col-sm-1" id="19"></div>
-	  	</div>
-	  	<br>
-	  	<div class="row2" >
-	      <div class="col-sm-1" id="21"></div>
-	      <div class="col-sm-1" id="22"></div>
-	      <div class="col-sm-1" id="23"></div>
-	      <div class="col-sm-1" id="24"></div>
-	      <div class="col-sm-1" id="25"></div>
-	      <div class="col-sm-1" id="26"></div>
-	      <div class="col-sm-1" id="27"></div>
-	      <div class="col-sm-1" id="28"></div>
-	      <div class="col-sm-1" id="29"></div>
-	  	</div>
-	  	<br>
-	  	<div class="row3" >
-	      <div class="col-sm-1" id="31"></div>
-	      <div class="col-sm-1" id="32"></div>
-	      <div class="col-sm-1" id="33"></div>
-	      <div class="col-sm-1" id="34"></div>
-	      <div class="col-sm-1" id="35"></div>
-	      <div class="col-sm-1" id="36"></div>
-	      <div class="col-sm-1" id="37"></div>
-	      <div class="col-sm-1" id="38"></div>
-	      <div class="col-sm-1" id="39"></div>
-	  	</div>
-	  	<br>
-	  	<div class="row4" >
-	      <div class="col-sm-1" id="41"></div>
-	      <div class="col-sm-1" id="42"></div>
-	      <div class="col-sm-1" id="43"></div>
-	      <div class="col-sm-1" id="44"></div>
-	      <div class="col-sm-1" id="45"></div>
-	      <div class="col-sm-1" id="46"></div>
-	      <div class="col-sm-1" id="47"></div>
-	      <div class="col-sm-1" id="48"></div>
-	      <div class="col-sm-1" id="49"></div>
-	  	</div>
-	  	<br>
-	  	<div class="row5" >
-	      <div class="col-sm-1" id="51"></div>
-	      <div class="col-sm-1" id="52"></div>
-	      <div class="col-sm-1" id="53"></div>
-	      <div class="col-sm-1" id="54"></div>
-	      <div class="col-sm-1" id="55"></div>
-	      <div class="col-sm-1" id="56"></div>
-	      <div class="col-sm-1" id="57"></div>
-	      <div class="col-sm-1" id="58"></div>
-	      <div class="col-sm-1" id="59"></div>
-	  	</div>
-	  	<br>
-	  	<div class="row6" >
-	      <div class="col-sm-1" id="61"></div>
-	      <div class="col-sm-1" id="62"></div>
-	      <div class="col-sm-1" id="63"></div>
-	      <div class="col-sm-1" id="64"></div>
-	      <div class="col-sm-1" id="65"></div>
-	      <div class="col-sm-1" id="66"></div>
-	      <div class="col-sm-1" id="67"></div>
-	      <div class="col-sm-1" id="68"></div>
-	      <div class="col-sm-1" id="69"></div>
-	  	</div>
-	  	<br>
-	  	<div class="row7" >
-	      <div class="col-sm-1" id="71"></div>
-	      <div class="col-sm-1" id="72"></div>
-	      <div class="col-sm-1" id="73"></div>
-	      <div class="col-sm-1" id="74"></div>
-	      <div class="col-sm-1" id="75"></div>
-	      <div class="col-sm-1" id="76"></div>
-	      <div class="col-sm-1" id="77"></div>
-	      <div class="col-sm-1" id="78"></div>
-	      <div class="col-sm-1" id="79"></div>
-	  	</div>
-	  	<br>
-	  	<div class="row8" >
-	      <div class="col-sm-1" id="81"></div>
-	      <div class="col-sm-1" id="82"></div>
-	      <div class="col-sm-1" id="83"></div>
-	      <div class="col-sm-1" id="84"></div>
-	      <div class="col-sm-1" id="85"></div>
-	      <div class="col-sm-1" id="86"></div>
-	      <div class="col-sm-1" id="87"></div>
-	      <div class="col-sm-1" id="88"></div>
-	      <div class="col-sm-1" id="89"></div>
-	  	</div>
-	  	<br>
-	  	<div class="row9" >
-	   		<div class="col-sm-1" id="91"></div>
-	      	<div class="col-sm-1" id="92"></div>
-	      	<div class="col-sm-1" id="93"></div>
-	      	<div class="col-sm-1" id="94"></div>
-	      	<div class="col-sm-1" id="95"></div>
-	      	<div class="col-sm-1" id="96"></div>
-	      	<div class="col-sm-1" id="97"></div>
-	      	<div class="col-sm-1" id="98"></div>
-	      	<div class="col-sm-1" id="99"></div>
-	  	</div>
+    	<center>
+	        <table>
+	            <tr class="border-top" id="row1">
+	                <td class="col-sm-1" id="11"></td>
+	                <td class="col-sm-1" id="12"></td>
+	                <td class="col-sm-1" id="13"></td>
+	                <td class="col-sm-1" id="14"></td>
+	                <td class="col-sm-1" id="15"></td>
+	                <td class="col-sm-1" id="16"></td>
+	                <td class="col-sm-1" id="17"></td>
+	                <td class="col-sm-1" id="18"></td>
+	                <td class="col-sm-1" id="19"></td>
+	            </tr>
+	            <tr id="row2">
+	                <td class="col-sm-1" id="21"></td>
+	                <td class="col-sm-1" id="22"></td>
+	                <td class="col-sm-1" id="23"></td>
+	                <td class="col-sm-1" id="24"></td>
+	                <td class="col-sm-1" id="25"></td>
+	                <td class="col-sm-1" id="26"></td>
+	                <td class="col-sm-1" id="27"></td>
+	                <td class="col-sm-1" id="28"></td>
+	                <td class="col-sm-1" id="29"></td>
+	            </tr>
+	            <tr class="border-bottom" id="row3">
+	                <td class="col-sm-1" id="31"></td>
+	                <td class="col-sm-1" id="32"></td>
+	                <td class="col-sm-1" id="33"></td>
+	                <td class="col-sm-1" id="34"></td>
+	                <td class="col-sm-1" id="35"></td>
+	                <td class="col-sm-1" id="36"></td>
+	                <td class="col-sm-1" id="37"></td>
+	                <td class="col-sm-1" id="38"></td>
+	                <td class="col-sm-1" id="39"></td>
+	            </tr>
+	            <tr id="row4">
+	                <td class="col-sm-1" id="41"></td>
+	                <td class="col-sm-1" id="42"></td>
+	                <td class="col-sm-1" id="43"></td>
+	                <td class="col-sm-1" id="44"></td>
+	                <td class="col-sm-1" id="45"></td>
+	                <td class="col-sm-1" id="46"></td>
+	                <td class="col-sm-1" id="47"></td>
+	                <td class="col-sm-1" id="48"></td>
+	                <td class="col-sm-1" id="49"></td>
+	            </tr>
+	            <tr id="row5">
+	                <td class="col-sm-1" id="51"></td>
+	                <td class="col-sm-1" id="52"></td>
+	                <td class="col-sm-1" id="53"></td>
+	                <td class="col-sm-1" id="54"></td>
+	                <td class="col-sm-1" id="55"></td>
+	                <td class="col-sm-1" id="56"></td>
+	                <td class="col-sm-1" id="57"></td>
+	                <td class="col-sm-1" id="58"></td>
+	                <td class="col-sm-1" id="59"></td>
+	            </tr>
+	            <tr class="border-bottom" id="row6">
+	                <td class="col-sm-1" id="61"></td>
+	                <td class="col-sm-1" id="62"></td>
+	                <td class="col-sm-1" id="63"></td>
+	                <td class="col-sm-1" id="64"></td>
+	                <td class="col-sm-1" id="65"></td>
+	                <td class="col-sm-1" id="66"></td>
+	                <td class="col-sm-1" id="67"></td>
+	                <td class="col-sm-1" id="68"></td>
+	                <td class="col-sm-1" id="69"></td>
+	            </tr>
+	            <tr id="row7">
+	                <td class="col-sm-1" id="71"></td>
+	                <td class="col-sm-1" id="72"></td>
+	                <td class="col-sm-1" id="73"></td>
+	                <td class="col-sm-1" id="74"></td>
+	                <td class="col-sm-1" id="75"></td>
+	                <td class="col-sm-1" id="76"></td>
+	                <td class="col-sm-1" id="77"></td>
+	                <td class="col-sm-1" id="78"></td>
+	                <td class="col-sm-1" id="79"></td>
+	            </tr>
+	            <tr id="row8">
+	                <td class="col-sm-1" id="81"></td>
+	                <td class="col-sm-1" id="82"></td>
+	                <td class="col-sm-1" id="83"></td>
+	                <td class="col-sm-1" id="84"></td>
+	                <td class="col-sm-1" id="85"></td>
+	                <td class="col-sm-1" id="86"></td>
+	                <td class="col-sm-1" id="87"></td>
+	                <td class="col-sm-1" id="88"></td>
+	                <td class="col-sm-1" id="89"></td>
+	            </tr>
+	            <tr class="border-bottom" id="row9">
+	                <td class="col-sm-1" id="91"></td>
+	                <td class="col-sm-1" id="92"></td>
+	                <td class="col-sm-1" id="93"></td>
+	                <td class="col-sm-1" id="94"></td>
+	                <td class="col-sm-1" id="95"></td>
+	                <td class="col-sm-1" id="96"></td>
+	                <td class="col-sm-1" id="97"></td>
+	                <td class="col-sm-1" id="98"></td>
+	                <td class="col-sm-1" id="99"></td>
+	            </tr>
+	        </table>
+    	</center>
     </div>
 </div>
 </body>
